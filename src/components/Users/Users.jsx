@@ -8,10 +8,11 @@ import {
   ListInformStyled,
   ListShortInformStyled,
 } from './styled';
-
+import Loader from '../Animation';
 export default function Users() {
-  const { users } = useSelector((state) => ({
+  const { users, loader } = useSelector((state) => ({
     users: state.user.users,
+    loader: state.user.loader,
   }));
   console.log(users);
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Users() {
 
   return (
     <WrapperStyled>
+      {loader && <Loader />}
       <ListWrapperStyled>
         <ListStyled>
           <ListShortInformStyled>ID</ListShortInformStyled>
