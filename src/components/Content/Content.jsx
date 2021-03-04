@@ -1,5 +1,10 @@
 import React from 'react';
-import { Wrapper } from './styled';
+import { WrapperStyled } from './styled';
+import Users from '../Users';
 export default function Content() {
-  return <Wrapper>hello</Wrapper>;
+  return (
+    <WrapperStyled>
+      <Users />
+    </WrapperStyled>
+  );
 }
