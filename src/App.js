@@ -2,12 +2,12 @@ import React from 'react';
 import Navigation from './components/Navigation';
 import Content from './components/Content';
 import { MainWrapperStyled, WrapperStyled } from './styledApp';
-export default function App() {
+export default function App(props) {
   return (
     <MainWrapperStyled>
       <WrapperStyled>
         <Navigation />
-        <Content />
+        <Content content={props.children} />
       </WrapperStyled>
     </MainWrapperStyled>
   );

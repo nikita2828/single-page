@@ -1,17 +1,19 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 export const WrapperStyled = styled.div`
   min-height: 100vh;
   background-color: rgb(42, 67, 116);
   min-width: 240px;
   width: 20%;
 `;
-export const LinkStyled = styled.a`
+export const LinkStyled = styled(Link)`
   color: rgb(255, 255, 255);
   display: block;
   font-size: 26px;
   padding-left: 50px;
   padding-bottom: 35px;
   cursor: pointer;
+  text-decoration: none;
 `;
 
 export const UserNameStyled = styled.p`
