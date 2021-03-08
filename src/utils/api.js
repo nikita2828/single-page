@@ -9,6 +9,7 @@ const instance = axios.create({
 const api = {
   user: {
     getUsers: () => instance.get(`/user`),
+    getRecipes: () => instance.get(`/recipe`),
   },
 };
 
