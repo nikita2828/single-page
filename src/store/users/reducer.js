@@ -1,4 +1,14 @@
-import { USERS_REQUEST, USERS_SUCCESS, USERS_ERROR } from './constant';
+import {
+  USERS_REQUEST,
+  USERS_SUCCESS,
+  USERS_ERROR,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
+  POST_USER_REQUEST,
+  POST_USER_SUCCESS,
+  POST_USER_ERROR,
+} from './constant';
 
 const reducerState = {
   users: [],
@@ -10,6 +20,8 @@ const userReducer = (state = reducerState, action) => {
 
   switch (type) {
     case USERS_REQUEST:
+    case DELETE_USER_REQUEST:
+    case POST_USER_REQUEST:
       return {
         ...state,
         loader: true,
@@ -21,6 +33,10 @@ const userReducer = (state = reducerState, action) => {
         loader: false,
       };
     case USERS_ERROR:
+    case DELETE_USER_SUCCESS:
+    case DELETE_USER_ERROR:
+    case POST_USER_SUCCESS:
+    case POST_USER_ERROR:
       return {
         ...state,
         loader: false,

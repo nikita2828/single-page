@@ -5,7 +5,7 @@ import {
   ListInformStyled,
   ListShortInformStyled,
 } from './styled';
-export default function List({ data, names, shortNames }) {
+export default function List({ data, names, shortNames, deleteButton }) {
   const prepareNames = () => {
     return names.map((name) => {
       switch (name) {
@@ -40,16 +40,19 @@ export default function List({ data, names, shortNames }) {
     <>
       <ListWrapperStyled>
         <ListStyled>
-          {shortLabels.map((name) => {
-            return <ListShortInformStyled>{name}</ListShortInformStyled>;
+          {shortLabels.map((name, i) => {
+            return (
+              <ListShortInformStyled key={i}>{name}</ListShortInformStyled>
+            );
           })}
-          {labels.map((name) => {
-            return <ListInformStyled>{name}</ListInformStyled>;
+          {labels.map((name, i) => {
+            return <ListInformStyled key={i}>{name}</ListInformStyled>;
           })}
+          {deleteButton && <ListInformStyled>DELETE</ListInformStyled>}
         </ListStyled>
         {data.map((user) => {
           return (
-            <ListStyled>
+            <ListStyled key={user.id}>
               {shortNames.map((name, index) => {
                 return (
                   <ListShortInformStyled key={index}>
@@ -62,6 +65,9 @@ export default function List({ data, names, shortNames }) {
                   <ListInformStyled key={index}>{user[name]}</ListInformStyled>
                 );
               })}
+              {deleteButton && (
+                <ListInformStyled>{deleteButton(user.id)}</ListInformStyled>
+              )}
             </ListStyled>
           );
         })}

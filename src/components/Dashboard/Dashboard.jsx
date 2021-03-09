@@ -1,5 +1,10 @@
 import React from 'react';
+import App from '../../App';
 
 export default function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <App>
+      <div>Dashboard</div>
+    </App>
+  );
 }

@@ -9,6 +9,8 @@ const instance = axios.create({
 const api = {
   user: {
     getUsers: () => instance.get(`/user`),
+    deleteUser: (id) => instance.delete(`/user/${id}`),
+    postUser: (obj) => instance.post(`/user/`, obj),
     getRecipes: () => instance.get(`/recipe`),
   },
 };
