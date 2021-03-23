@@ -8,25 +8,28 @@ export const ListStyled = styled.li`
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  background-color: rgb(255, 255, 255);
-  margin-bottom: 5px;
+  background-color: ${(props) => props.color};
+  margin-bottom: 2px;
   height: 25px;
   border-radius: 5px;
+  padding: 20px;
 `;
 
 export const ListInformStyled = styled.span`
   display: flex;
   justify-content: flex-start;
   border-right: 2px solid rgb(235 240 246);
-  width: 30%;
+  width: 28%;
   justify-content: center;
+  font-size: 14px;
 `;
 
 export const ListShortInformStyled = styled.span`
   display: flex;
   justify-content: flex-start;
   border-right: 2px solid rgb(235 240 246);
-  width: 5%;
+  width: 7%;
   max-width: 10%;
   justify-content: center;
+  font-size: 14px;
 `;

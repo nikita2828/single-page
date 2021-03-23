@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { WrapperStyled, FormStyled, InputStyled, ErrorStyled } from './styled';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { postUser } from '../../store/users/action';
-export default function CreateNewUser() {
+import routes from '../../constants/routes';
+import Context from '../../context';
+export default function CreateNewUser({ history }) {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const createUser = (obj) => dispatch(postUser(obj));
-    createUser(data);
+    await createUser(data);
+    await history.push(routes.users);
   };
-
+  const { data } = useContext(Context);
   return (
     <WrapperStyled>
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -20,6 +23,7 @@ export default function CreateNewUser() {
           name='email'
           ref={register({ required: true })}
           placeholder='enter email'
+          defaultValue={data.email}
         />
         {errors.email && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -33,6 +37,7 @@ export default function CreateNewUser() {
           name='role'
           ref={register({ required: true })}
           placeholder='enter role'
+          defaultValue={data.role}
         />
         {errors.role && <ErrorStyled>This field is required</ErrorStyled>}
 

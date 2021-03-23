@@ -34,17 +34,17 @@ export default function Routes() {
         <Route
           exact
           path={routes.users}
-          component={() => (
+          component={({ history }) => (
             <App>
-              <Users />
+              <Users history={history} />
             </App>
           )}
         />
         <Route
           path={routes.createNewUser}
-          component={() => (
+          component={({ history }) => (
             <App>
-              <CreateNewUser />
+              <CreateNewUser history={history} />
             </App>
           )}
         />

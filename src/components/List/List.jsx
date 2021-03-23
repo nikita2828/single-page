@@ -5,7 +5,13 @@ import {
   ListInformStyled,
   ListShortInformStyled,
 } from './styled';
-export default function List({ data, names, shortNames, deleteButton }) {
+export default function List({
+  data,
+  names,
+  shortNames,
+  deleteButton,
+  createButton,
+}) {
   const prepareNames = () => {
     return names.map((name) => {
       switch (name) {
@@ -39,7 +45,7 @@ export default function List({ data, names, shortNames, deleteButton }) {
   return (
     <>
       <ListWrapperStyled>
-        <ListStyled>
+        <ListStyled color='rgb(192 197 204)'>
           {shortLabels.map((name, i) => {
             return (
               <ListShortInformStyled key={i}>{name}</ListShortInformStyled>
@@ -52,7 +58,7 @@ export default function List({ data, names, shortNames, deleteButton }) {
         </ListStyled>
         {data.map((user) => {
           return (
-            <ListStyled key={user.id}>
+            <ListStyled color='rgb(255, 255, 255)' key={user.id}>
               {shortNames.map((name, index) => {
                 return (
                   <ListShortInformStyled key={index}>
@@ -65,9 +71,16 @@ export default function List({ data, names, shortNames, deleteButton }) {
                   <ListInformStyled key={index}>{user[name]}</ListInformStyled>
                 );
               })}
-              {deleteButton && (
+              {createButton && deleteButton ? (
+                <ListInformStyled>
+                  {createButton(user)}
+                  {deleteButton(user.id)}
+                </ListInformStyled>
+              ) : createButton ? (
+                <ListInformStyled>{createButton(user)}</ListInformStyled>
+              ) : deleteButton ? (
                 <ListInformStyled>{deleteButton(user.id)}</ListInformStyled>
-              )}
+              ) : null}
             </ListStyled>
           );
         })}
