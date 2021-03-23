@@ -11,7 +11,11 @@ const api = {
     getUsers: () => instance.get(`/user`),
     deleteUser: (id) => instance.delete(`/user/${id}`),
     postUser: (obj) => instance.post(`/user/`, obj),
+  },
+  recipe: {
     getRecipes: () => instance.get(`/recipe`),
+    deleteRecipe: (id) => instance.delete(`/recipe${id}`),
+    postRecipe: (obj) => instance.post('/recipe', obj),
   },
 };
 

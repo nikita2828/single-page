@@ -54,7 +54,9 @@ export default function List({
           {labels.map((name, i) => {
             return <ListInformStyled key={i}>{name}</ListInformStyled>;
           })}
-          {deleteButton && <ListInformStyled>DELETE</ListInformStyled>}
+          {deleteButton || createButton ? (
+            <ListInformStyled>ACTION</ListInformStyled>
+          ) : null}
         </ListStyled>
         {data.map((user) => {
           return (

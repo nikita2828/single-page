@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 import { WrapperStyled, FormStyled, InputStyled, ErrorStyled } from './styled';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postUser } from '../../store/users/action';
 import routes from '../../constants/routes';
 import Context from '../../context';
+import Loader from '../Animation';
+
 export default function CreateNewUser({ history }) {
+  const { loader } = useSelector((state) => ({
+    loader: state.user.loader,
+  }));
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
@@ -17,6 +22,7 @@ export default function CreateNewUser({ history }) {
   const { data } = useContext(Context);
   return (
     <WrapperStyled>
+      {loader && <Loader />}
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
         <InputStyled
           type='email'

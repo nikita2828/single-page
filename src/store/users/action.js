@@ -69,13 +69,12 @@ export const deleteUser = (id) => (dispatch) => {
     .catch(() => dispatch(deleteUserError()));
 };
 
-export const postUser = (obj) => (dispatch) => {
-  dispatch(postUserRequest());
-  api.user
+export const postUser = (obj) => async (dispatch) => {
+  await dispatch(postUserRequest());
+  await api.user
     .postUser(obj)
     .then(() => {
       dispatch(postUserSuccess());
-      dispatch(getUsers());
     })
     .catch(() => dispatch(postUserError()));
 };
