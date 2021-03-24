@@ -39,7 +39,7 @@ export default function Users({ history }) {
   const ButtonCreate = (user) => {
     return (
       <Button
-        title='Create'
+        title='Change'
         color='rgb(19 169 100)'
         onClick={() => createUserId(user)}
       />

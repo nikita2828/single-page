@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard';
 import App from '../App';
 import routes from '../constants/routes';
 import CreateNewUser from '../components/CreateNewUser';
+import CreateNewRecipe from '../components/CreateNewRecipe';
 
 export default function Routes() {
   return (
@@ -24,10 +25,19 @@ export default function Routes() {
           )}
         />
         <Route
+          exact
           path={routes.recipes}
-          component={() => (
+          component={({ history }) => (
             <App>
-              <Recipes />
+              <Recipes history={history} />
+            </App>
+          )}
+        />
+        <Route
+          path={routes.createNewRecipe}
+          component={({ history }) => (
+            <App>
+              <CreateNewRecipe history={history} />
             </App>
           )}
         />
