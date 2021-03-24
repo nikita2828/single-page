@@ -40,12 +40,12 @@ export default function Recipes({ history }) {
       />
     );
   };
-  const ButtonCreate = (user) => {
+  const ButtonCreate = (recipe) => {
     return (
       <Button
         title='Change'
         color='rgb(19 169 100)'
-        onClick={() => createRecipeId(user)}
+        onClick={() => createRecipeId(recipe)}
       />
     );
   };

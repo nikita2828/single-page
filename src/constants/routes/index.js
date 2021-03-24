@@ -5,5 +5,6 @@ const routes = {
   users: '/users',
   createNewUser: '/users/create',
   categories: '/categories',
+  createNewCategory: '/categories/create',
 };
 export default routes;

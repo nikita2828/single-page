@@ -8,18 +8,19 @@ import {
   POST_USER_REQUEST,
   POST_USER_SUCCESS,
   POST_USER_ERROR,
+  PUT_USER_REQUEST,
+  PUT_USER_SUCCESS,
+  PUT_USER_ERROR,
 } from './constant';
 import api from '../../utils/api';
 
 const usersRequest = () => ({
   type: USERS_REQUEST,
 });
-
 const usersSuccess = (payload) => ({
   type: USERS_SUCCESS,
   payload,
 });
-
 const usersError = () => ({
   type: USERS_ERROR,
 });
@@ -27,11 +28,9 @@ const usersError = () => ({
 const deleteUserRequest = () => ({
   type: DELETE_USER_REQUEST,
 });
-
 const deleteUserSuccess = () => ({
   type: DELETE_USER_SUCCESS,
 });
-
 const deleteUserError = () => ({
   type: DELETE_USER_ERROR,
 });
@@ -39,13 +38,21 @@ const deleteUserError = () => ({
 const postUserRequest = () => ({
   type: POST_USER_REQUEST,
 });
-
 const postUserSuccess = () => ({
   type: POST_USER_SUCCESS,
 });
-
 const postUserError = () => ({
   type: POST_USER_ERROR,
+});
+
+const putUserRequest = () => ({
+  type: PUT_USER_REQUEST,
+});
+const putUserSuccess = () => ({
+  type: PUT_USER_SUCCESS,
+});
+const putUserError = () => ({
+  type: PUT_USER_ERROR,
 });
 
 export const getUsers = () => (dispatch) => {
@@ -77,4 +84,14 @@ export const postUser = (obj) => async (dispatch) => {
       dispatch(postUserSuccess());
     })
     .catch(() => dispatch(postUserError()));
+};
+
+export const putUser = (id, obj) => async (dispatch) => {
+  await dispatch(putUserRequest());
+  return await api.user
+    .putUser(id, obj)
+    .then(() => {
+      dispatch(putUserSuccess());
+    })
+    .catch(() => dispatch(putUserError()));
 };

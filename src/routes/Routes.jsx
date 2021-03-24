@@ -8,6 +8,7 @@ import App from '../App';
 import routes from '../constants/routes';
 import CreateNewUser from '../components/CreateNewUser';
 import CreateNewRecipe from '../components/CreateNewRecipe';
+import CreateNewCategory from '../components/CreateNewCategory';
 
 export default function Routes() {
   return (
@@ -18,9 +19,17 @@ export default function Routes() {
         <Route
           exact
           path={routes.categories}
-          component={() => (
+          component={({ history }) => (
             <App>
-              <Categories />
+              <Categories history={history} />
+            </App>
+          )}
+        />
+        <Route
+          path={routes.createNewCategory}
+          component={({ history }) => (
+            <App>
+              <CreateNewCategory history={history} />
             </App>
           )}
         />

@@ -1,4 +1,4 @@
-import { DELETE_USER_ERROR } from '../users/constant';
+import { PUT_CATEGORY_REQUEST } from '../categories/constant';
 import {
   RECIPES_REQUEST,
   RECIPES_SUCCESS,
@@ -9,6 +9,9 @@ import {
   POST_RECIPE_REQUEST,
   POST_RECIPE_SUCCESS,
   POST_RECIPE_ERROR,
+  PUT_RECIPE_REQUEST,
+  PUT_RECIPE_SUCCESS,
+  PUT_RECIPE_ERROR,
 } from './constant';
 
 const reducerState = {
@@ -23,6 +26,7 @@ const recipeReducer = (state = reducerState, action) => {
     case RECIPES_REQUEST:
     case DELETE_RECIPE_REQUEST:
     case POST_RECIPE_REQUEST:
+    case PUT_CATEGORY_REQUEST:
       return {
         ...state,
         loader: true,
@@ -38,6 +42,8 @@ const recipeReducer = (state = reducerState, action) => {
     case DELETE_RECIPE_ERROR:
     case POST_RECIPE_SUCCESS:
     case POST_RECIPE_ERROR:
+    case PUT_RECIPE_ERROR:
+    case PUT_RECIPE_SUCCESS:
       return {
         ...state,
         loader: false,

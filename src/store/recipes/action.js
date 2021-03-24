@@ -8,18 +8,19 @@ import {
   POST_RECIPE_REQUEST,
   POST_RECIPE_SUCCESS,
   POST_RECIPE_ERROR,
+  PUT_RECIPE_REQUEST,
+  PUT_RECIPE_SUCCESS,
+  PUT_RECIPE_ERROR,
 } from './constant';
 import api from '../../utils/api';
 
 const recipesRequest = () => ({
   type: RECIPES_REQUEST,
 });
-
 const recipesSuccess = (payload) => ({
   type: RECIPES_SUCCESS,
   payload,
 });
-
 const recipesError = () => ({
   type: RECIPES_ERROR,
 });
@@ -27,11 +28,9 @@ const recipesError = () => ({
 const deleteRecipeRequest = () => ({
   type: DELETE_RECIPE_REQUEST,
 });
-
 const deleteRecipeSuccess = () => ({
   type: DELETE_RECIPE_SUCCESS,
 });
-
 const deleteRecipeError = () => ({
   type: DELETE_RECIPE_ERROR,
 });
@@ -44,6 +43,16 @@ const postRecipeSuccess = () => ({
 });
 const postRecipeError = () => ({
   type: POST_RECIPE_ERROR,
+});
+
+const putRecipeRequest = () => ({
+  type: PUT_RECIPE_REQUEST,
+});
+const putRecipeSuccess = () => ({
+  type: PUT_RECIPE_SUCCESS,
+});
+const putRecipeError = () => ({
+  type: PUT_RECIPE_ERROR,
 });
 
 export const getRecipes = () => async (dispatch) => {
@@ -71,4 +80,12 @@ export const postRecipe = (obj) => async (dispatch) => {
     .postRecipe(obj)
     .then(() => dispatch(postRecipeSuccess()))
     .catch(() => dispatch(postRecipeError()));
+};
+
+export const putRecipe = (id, obj) => async (dispatch) => {
+  await dispatch(putRecipeRequest());
+  return await api.recipe
+    .putRecipe(id, obj)
+    .then(() => dispatch(putRecipeSuccess()))
+    .catch(() => dispatch(putRecipeError()));
 };

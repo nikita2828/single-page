@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { WrapperStyled, FormStyled, InputStyled, ErrorStyled } from './styled';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { postRecipe } from '../../store/recipes/action';
+import { postRecipe, putRecipe } from '../../store/recipes/action';
 import routes from '../../constants/routes';
 import Context from '../../context';
 import Loader from '../Animation';
@@ -11,18 +11,31 @@ export default function CreateNewRecipe({ history }) {
   const { loader } = useSelector((state) => ({
     loader: state.recipe.loader,
   }));
-
+  const { dataForChangeRequest } = useContext(Context);
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     const arrOfNumberId = data.categoryIds.split(',').map((str) => Number(str));
     data.categoryIds = arrOfNumberId;
-    const createRecipe = (obj) => dispatch(postRecipe(obj));
-    await createRecipe(data);
-    await history.push(routes.recipes);
+    const objChangeRequest = {
+      title: data.title,
+      body: data.body,
+      img: data.img,
+      video: data.video,
+      categoryIds: data.categoryIds,
+    };
+    if (dataForChangeRequest) {
+      const changeRecipe = (id, obj) => dispatch(putRecipe(id, obj));
+      await changeRecipe(dataForChangeRequest.id, objChangeRequest);
+      await history.push(routes.recipes);
+    } else {
+      const createRecipe = (obj) => dispatch(postRecipe(obj));
+      await createRecipe(data);
+      await history.push(routes.recipes);
+    }
   };
-  const { data } = useContext(Context);
+
   return (
     <WrapperStyled>
       {loader && <Loader />}
@@ -32,7 +45,7 @@ export default function CreateNewRecipe({ history }) {
           name='title'
           ref={register({ required: true })}
           placeholder='enter title'
-          defaultValue={data.title}
+          defaultValue={dataForChangeRequest.title}
         />
         {errors.title && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -41,7 +54,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter description'
           type='text'
-          defaultValue={data.body}
+          defaultValue={dataForChangeRequest.body}
         />
         {errors.body && <ErrorStyled>This field is required</ErrorStyled>}
         <InputStyled
@@ -49,7 +62,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter img'
           type='url'
-          defaultValue={data.img}
+          defaultValue={dataForChangeRequest.img}
         />
         {errors.img && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -58,7 +71,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter video'
           type='url'
-          defaultValue={data.video}
+          defaultValue={dataForChangeRequest.video}
         />
         {errors.video && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -67,7 +80,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter user id'
           type='text'
-          defaultValue={data.userId}
+          defaultValue={dataForChangeRequest.userId}
         />
         {errors.userId && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -76,7 +89,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter category'
           type='text'
-          defaultValue={data.categoryIds}
+          defaultValue={dataForChangeRequest.categoryIds}
         />
         {errors.categoryIds && (
           <ErrorStyled>This field is required</ErrorStyled>

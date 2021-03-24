@@ -7,11 +7,11 @@ import Routes from './routes';
 import Context from './context';
 
 function Main() {
-  const [data, setData] = useState('');
+  const [dataForChangeRequest, setData] = useState('');
 
   return (
     <Provider store={store}>
-      <Context.Provider value={{ data, setData }}>
+      <Context.Provider value={{ dataForChangeRequest, setData }}>
         <Routes />
       </Context.Provider>
     </Provider>
