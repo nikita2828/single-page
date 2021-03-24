@@ -18,7 +18,6 @@ export default function CreateNewRecipe({ history }) {
   const onSubmit = async (data) => {
     const arrOfNumberId = data.categoryIds.split(',').map((str) => Number(str));
     data.categoryIds = arrOfNumberId;
-    console.log(typeof data.video);
     const createRecipe = (obj) => dispatch(postRecipe(obj));
     await createRecipe(data);
     await history.push(routes.recipes);
@@ -42,6 +41,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter description'
           type='text'
+          defaultValue={data.body}
         />
         {errors.body && <ErrorStyled>This field is required</ErrorStyled>}
         <InputStyled
@@ -49,6 +49,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter img'
           type='url'
+          defaultValue={data.img}
         />
         {errors.img && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -57,6 +58,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter video'
           type='url'
+          defaultValue={data.video}
         />
         {errors.video && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -65,6 +67,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter user id'
           type='text'
+          defaultValue={data.userId}
         />
         {errors.userId && <ErrorStyled>This field is required</ErrorStyled>}
 
@@ -73,6 +76,7 @@ export default function CreateNewRecipe({ history }) {
           ref={register({ required: true })}
           placeholder='enter category'
           type='text'
+          defaultValue={data.categoryIds}
         />
         {errors.categoryIds && (
           <ErrorStyled>This field is required</ErrorStyled>

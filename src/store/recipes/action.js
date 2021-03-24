@@ -46,9 +46,9 @@ const postRecipeError = () => ({
   type: POST_RECIPE_ERROR,
 });
 
-export const getRecipes = () => (dispatch) => {
+export const getRecipes = () => async (dispatch) => {
   dispatch(recipesRequest());
-  return api.recipe
+  return await api.recipe
     .getRecipes()
     .then((res) => {
       dispatch(recipesSuccess(res.data));
@@ -56,11 +56,12 @@ export const getRecipes = () => (dispatch) => {
     .catch((err) => dispatch(recipesError(err)));
 };
 
-export const deleteRecipe = (id) => (dispatch) => {
+export const deleteRecipe = (id) => async (dispatch) => {
   dispatch(deleteRecipeRequest());
-  return api.recipe
+  return await api.recipe
     .deleteRecipe(id)
     .then(() => dispatch(deleteRecipeSuccess()))
+    .then(() => dispatch(getRecipes()))
     .catch(() => dispatch(deleteRecipeError()));
 };
 

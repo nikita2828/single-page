@@ -71,7 +71,7 @@ export const deleteUser = (id) => (dispatch) => {
 
 export const postUser = (obj) => async (dispatch) => {
   await dispatch(postUserRequest());
-  await api.user
+  return await api.user
     .postUser(obj)
     .then(() => {
       dispatch(postUserSuccess());

@@ -27,9 +27,9 @@ export default function Routes() {
         <Route
           exact
           path={routes.recipes}
-          component={() => (
+          component={({ history }) => (
             <App>
-              <Recipes />
+              <Recipes history={history} />
             </App>
           )}
         />

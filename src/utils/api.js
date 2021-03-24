@@ -14,7 +14,7 @@ const api = {
   },
   recipe: {
     getRecipes: () => instance.get(`/recipe`),
-    deleteRecipe: (id) => instance.delete(`/recipe${id}`),
+    deleteRecipe: (id) => instance.delete(`/recipe/${id}`),
     postRecipe: (obj) => instance.post('/recipe', obj),
   },
 };
