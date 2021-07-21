@@ -1,4 +1,3 @@
-import { DELETE_USER_ERROR } from '../users/constant';
 import {
   RECIPES_REQUEST,
   RECIPES_SUCCESS,

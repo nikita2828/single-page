@@ -8,6 +8,9 @@ import {
   POST_USER_REQUEST,
   POST_USER_SUCCESS,
   POST_USER_ERROR,
+  CHANGE_USER_REQUEST,
+  CHANGE_USER_SUCCESS,
+  CHANGE_USER_ERROR,
 } from './constant';
 
 const reducerState = {
@@ -22,6 +25,7 @@ const userReducer = (state = reducerState, action) => {
     case USERS_REQUEST:
     case DELETE_USER_REQUEST:
     case POST_USER_REQUEST:
+    case CHANGE_USER_REQUEST:
       return {
         ...state,
         loader: true,
@@ -37,6 +41,8 @@ const userReducer = (state = reducerState, action) => {
     case DELETE_USER_ERROR:
     case POST_USER_SUCCESS:
     case POST_USER_ERROR:
+    case CHANGE_USER_SUCCESS:
+    case CHANGE_USER_ERROR:
       return {
         ...state,
         loader: false,

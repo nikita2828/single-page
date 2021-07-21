@@ -10,6 +10,7 @@ const api = {
   user: {
     getUsers: () => instance.get(`/user`),
     deleteUser: (id) => instance.delete(`/user/${id}`),
+    changeUser: (id, obj) => instance.put(`/user/${id}`, obj),
     postUser: (obj) => instance.post(`/user/`, obj),
   },
   recipe: {

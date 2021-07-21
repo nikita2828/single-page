@@ -8,6 +8,9 @@ import {
   POST_USER_REQUEST,
   POST_USER_SUCCESS,
   POST_USER_ERROR,
+  CHANGE_USER_REQUEST,
+  CHANGE_USER_SUCCESS,
+  CHANGE_USER_ERROR,
 } from './constant';
 import api from '../../utils/api';
 
@@ -48,6 +51,16 @@ const postUserError = () => ({
   type: POST_USER_ERROR,
 });
 
+const changeUserSuccess = () => ({
+  type: CHANGE_USER_SUCCESS,
+});
+const changeUserError = () => ({
+  type: CHANGE_USER_ERROR,
+});
+const changeUserRequest = () => ({
+  type: CHANGE_USER_REQUEST,
+});
+
 export const getUsers = () => (dispatch) => {
   dispatch(usersRequest());
   return api.user
@@ -56,6 +69,17 @@ export const getUsers = () => (dispatch) => {
       dispatch(usersSuccess(res.data));
     })
     .catch(() => dispatch(usersError()));
+};
+
+export const changeUser = (id, obj) => (dispatch) => {
+  dispatch(changeUserRequest());
+  return api.user
+    .changeUser(id, obj)
+    .then(() => {
+      dispatch(changeUserSuccess());
+      dispatch(getUsers());
+    })
+    .catch(() => dispatch(changeUserError()));
 };
 
 export const deleteUser = (id) => (dispatch) => {

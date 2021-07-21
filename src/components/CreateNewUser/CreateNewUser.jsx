@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { WrapperStyled, FormStyled, InputStyled, ErrorStyled } from './styled';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { postUser } from '../../store/users/action';
+import { postUser, changeUser } from '../../store/users/action';
 import routes from '../../constants/routes';
 import Context from '../../context';
 import Loader from '../Animation';
@@ -13,13 +13,26 @@ export default function CreateNewUser({ history }) {
   }));
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
-
-  const onSubmit = async (data) => {
-    const createUser = (obj) => dispatch(postUser(obj));
-    await createUser(data);
-    await history.push(routes.users);
-  };
   const { data } = useContext(Context);
+  // if (data.id) {
+  // } else {
+  // }
+  const onSubmit = async (inputData) => {
+    if (data.id) {
+      const changeObj = {
+        email: inputData.email,
+        password: inputData.password,
+      };
+      const changeUserF = (id, obj) => dispatch(changeUser(id, obj));
+      await changeUserF(data.id, changeObj);
+      await history.push(routes.users);
+    } else {
+      const createUser = (obj) => dispatch(postUser(obj));
+      await createUser(inputData);
+      await history.push(routes.users);
+    }
+  };
+
   return (
     <WrapperStyled>
       {loader && <Loader />}
